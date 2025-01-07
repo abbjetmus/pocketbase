@@ -17,7 +17,7 @@ RUN unzip /tmp/pb.zip -d /pb-fardtjanst/
 # COPY ./pb_hooks /pb-fardtjanst/pb_hooks
 
 # Clean up any macOS metadata files
-RUN find /pb-fardtjanst/pb_migrations /pb-fardtjanst/pb_hooks -name "._*" -delete
+# RUN find /pb-fardtjanst/pb_migrations /pb-fardtjanst/pb_hooks -name "._*" -delete
 
 EXPOSE 8090
 
