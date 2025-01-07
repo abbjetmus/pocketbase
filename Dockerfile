@@ -2,7 +2,6 @@ FROM alpine:latest
 
 # Build arguments for versioning and instance naming
 ARG PB_VERSION=0.24.1
-ARG INSTANCE_NAME=lobbis-pb
 
 RUN apk add --no-cache \
     unzip \
@@ -10,20 +9,17 @@ RUN apk add --no-cache \
 
 # Download and unzip PocketBase
 ADD https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip /tmp/pb.zip
-RUN unzip /tmp/pb.zip -d /${INSTANCE_NAME}/ && \
+RUN unzip /tmp/pb.zip -d /loppis-pb/ && \
     rm /tmp/pb.zip
 
-# Create a directory for instance-specific data
-RUN mkdir -p /${INSTANCE_NAME}/pb_data
+# Copy the local data directory into the image
+COPY ./pb_data /loppis-pb/pb_data
 
-# Uncomment and modify these if you need migrations and hooks
-# COPY ./pb_migrations /${INSTANCE_NAME}/pb_migrations
-# COPY ./pb_hooks /${INSTANCE_NAME}/pb_hooks
+# Clean up any macOS metadata files
+RUN find /loppis-pb/pb_data "._*" -delete
 
-# Clean up any macOS metadata files if needed
-# RUN find /${INSTANCE_NAME}/pb_migrations /${INSTANCE_NAME}/pb_hooks -name "._*" -delete
-
+VOLUME /loppis-pb/pb_data
 EXPOSE 8090
 
 # Use instance-specific paths in the command
-CMD ["/${INSTANCE_NAME}/pocketbase serve --http=0.0.0.0:8090 --dir=/${INSTANCE_NAME}/pb_data"]
+CMD ["/loppis-pb/pocketbase", "serve", "--http=0.0.0.0:8090"]
