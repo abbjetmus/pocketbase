@@ -15,9 +15,6 @@ RUN unzip /tmp/pb.zip -d /loppis-pb/ && \
 # Copy the local data directory into the image
 COPY ./pb_data /loppis-pb/pb_data
 
-# Clean up any macOS metadata files
-RUN find /loppis-pb/pb_data "._*" -delete
-
 VOLUME /loppis-pb/pb_data
 EXPOSE 8090
 
