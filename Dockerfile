@@ -2,7 +2,7 @@ FROM alpine:latest
 
 # Build arguments for versioning and instance naming
 ARG PB_VERSION=0.24.1
-ARG INSTANCE_NAME=loppis-pb
+ARG INSTANCE_NAME=lobbis-pb
 
 RUN apk add --no-cache \
     unzip \
@@ -26,4 +26,4 @@ RUN mkdir -p /${INSTANCE_NAME}/pb_data
 EXPOSE 8090
 
 # Use instance-specific paths in the command
-CMD ["sh", "-c", "/${INSTANCE_NAME}/pocketbase serve --http=0.0.0.0:8090 --dir=/${INSTANCE_NAME}/pb_data"]
+CMD ["/${INSTANCE_NAME}/pocketbase serve --http=0.0.0.0:8090 --dir=/${INSTANCE_NAME}/pb_data"]
