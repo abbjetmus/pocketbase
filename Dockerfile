@@ -8,7 +8,7 @@ RUN apk add --no-cache \
 
 # Download and unzip PocketBase
 ADD https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip /tmp/pb.zip
-RUN unzip /tmp/pb.zip -d /justcount-pb/
+RUN unzip /tmp/pb.zip -d /loppis-pb/
 
 # Copy the local migrations directory into the image
 # COPY ./pb_migrations /pb-fardtjanst/pb_migrations
@@ -22,4 +22,4 @@ RUN unzip /tmp/pb.zip -d /justcount-pb/
 EXPOSE 8090
 
 # Set the default command to serve PocketBase
-CMD ["/justcount-pb/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/justcount-pb/pb_data"]
+CMD ["/loppis-pb/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/loppis-pb/pb_data"]
