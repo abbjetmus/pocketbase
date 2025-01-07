@@ -11,10 +11,10 @@ ADD https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/po
 RUN unzip /tmp/pb.zip -d /pb-fardtjanst/
 
 # Copy the local migrations directory into the image
-COPY ./pb_migrations /pb-fardtjanst/pb_migrations
+# COPY ./pb_migrations /pb-fardtjanst/pb_migrations
 
 # Copy the local hooks directory into the image
-COPY ./pb_hooks /pb-fardtjanst/pb_hooks
+# COPY ./pb_hooks /pb-fardtjanst/pb_hooks
 
 # Clean up any macOS metadata files
 RUN find /pb-fardtjanst/pb_migrations /pb-fardtjanst/pb_hooks -name "._*" -delete
@@ -22,4 +22,4 @@ RUN find /pb-fardtjanst/pb_migrations /pb-fardtjanst/pb_hooks -name "._*" -delet
 EXPOSE 8090
 
 # Set the default command to serve PocketBase
-CMD ["/pb-fardtjanst/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/pb-fardtjanst/pb_data", "--migrationsDir=/pb-fardtjanst/pb_migrations", "--hooksDir=/pb-fardtjanst/pb_hooks"]
+CMD ["/pb-fardtjanst/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/pb-fardtjanst/pb_data"]
