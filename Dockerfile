@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ARG PB_VERSION=0.23.5
+ARG PB_VERSION=0.24.1
 
 RUN apk add --no-cache \
     unzip \
@@ -14,12 +14,12 @@ RUN unzip /tmp/pb.zip -d /pb/
 COPY ./pb_migrations /pb/pb_migrations
 
 # Copy the local hooks directory into the image
-COPY ./pb_hooks /pb/pb_hooks
+COPY ./pb_hooks /pb-fardtjanst/pb_hooks
 
 # Clean up any macOS metadata files
-RUN find /pb/pb_migrations /pb/pb_hooks -name "._*" -delete
+RUN find /pb-fardtjanst/pb_migrations /pb-fardtjanst/pb_hooks -name "._*" -delete
 
 EXPOSE 8090
 
 # Set the default command to serve PocketBase
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/pb/pb_data", "--migrationsDir=/pb/pb_migrations", "--hooksDir=/pb/pb_hooks"]
+CMD ["/pb-fardtjanst/pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/pb-fardtjanst/pb_data", "--migrationsDir=/pb-fardtjanst/pb_migrations", "--hooksDir=/pb-fardtjanst/pb_hooks"]
