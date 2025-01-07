@@ -1,4 +1,4 @@
 # .gitignore
 pb_data/
-pb_migrations/._*
-pb_hooks/._*
+# pb_migrations/._*
+# pb_hooks/._*
